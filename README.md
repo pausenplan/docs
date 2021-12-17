@@ -4,42 +4,86 @@ Moduły:
 
 + account
 + account_list
++ account_update
++ account_signin
++ account_signout
 + user
 + user_list
+
 + token
 + token_list
 + time
 + time_list
 
 
+
 ## account
 
-## resource
-db::account
-
-### Model:
+Atrybuty:
 + Imię
 + Nazwisko
 + Rola []
 + Stanowisko
-+ username 
++ username
+
+Funkcje:
+set*
+get*
+
+zamiast account entity
+zastosowac kolekcje pojedynczych parametrow
+
++ FirstName
++ LastName
++ TeamRole
++ WorkPosition
++ UserName
+
+```php
+class Controller{
+
+  // Collection
+  AccountCollection = new Collection(FirstName, LastName, TeamRole, WorkPosition, UserName)
+  
+  // Resource
+  DbResource = new Db()
+
+  // Query Command
+  function AccountCreate() {
+    return new Event(
+      new Create(AccountCollection, DbResource)
+    )
+  )
+
+}
+```
+
+## account_db
+
+## resource/connector
+db::account
+
+## entities:
+account
 
 ### Funkcje:
-+ signin()
-+ signout()
++ create()
++ read()
 + update()
++ delete()
 
 
-## account_signin
+
+## account_create
 
 ### View:
-1. Formularz rejestracji konta użytkownika
+1. Zmiana danych konta
 
 ## resource
 db::account
 
 ### Funkcje:
-+ signin()
++ signin(account)
 
 
 ## account_update
@@ -52,6 +96,21 @@ db::account
 
 ### Funkcje:
 + signout()
+
+
+
+
+
+## account_signin
+
+### View:
+1. Formularz rejestracji konta użytkownika
+
+## resource
+db::account
+
+### Funkcje:
++ signin()
 
 
 
